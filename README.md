@@ -1,6 +1,6 @@
-# JSON Implementation in Squirrel
+# JSON encoder/decoder in Squirrel
  
-(decoding is coming)
+(decoder is coming)
 
 ## Example
 
