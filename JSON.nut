@@ -13,13 +13,12 @@ JSON <- {
    * @returns {string}
    */
   stringify = function (value) {
-    return JSON._encode(value, true);
+    return JSON._encode(value, true, type(value) == "array");
   },
 
   /**
    * @param {table|array} val
-   * @param {boolean} _isRoot
-   * @param {boolean} _isArray
+   * @param {boolean} root
    * @private
    */
  _encode = function (val, _isRoot = true, _isArray = false) {
@@ -65,6 +64,14 @@ JSON <- {
 
     r = r.slice(0, r.len() - 1);
 
-    return _isRoot ? ("{" + r + "}") : r;
+    if (_isRoot) {
+      if (_isArray) {
+        return "[" + r + "]";
+      } else {
+        return "{" + r + "}";
+      }
+    } else {
+      return r;
+    }
   }
 }
