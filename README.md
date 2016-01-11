@@ -13,7 +13,7 @@ t <- {
   c = A,
   d = 5.125,
   e = A(),
-  c = null
+  f = null
 };
 
 server.log(JSON.stringify(t));
@@ -22,5 +22,5 @@ server.log(JSON.stringify(t));
 should produce
  
 ```json
-{"a":123,"c":null,"b":[1,2,3,4],"e":"(instance : 0x2000b99c)","d":5.125}
+{"a":123,"c":"(class : 0x2000b63c)","b":[1,2,3,4],"e":"(instance : 0x2000b99c)","d":5.125,"f":null}
 ```
