@@ -35,7 +35,7 @@ JSON <- {
       switch (type(value)) {
 
         case "table":
-          r += "{\n" + JSON._encode(value, false) + "}";
+          r += "{" + JSON._encode(value, false) + "}";
           break
 
         case "array":
