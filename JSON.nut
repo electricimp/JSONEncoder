@@ -47,6 +47,7 @@ JSON <- {
 
         case "integer":
         case "float":
+        case "bool":
           r += value;
           break;
 
