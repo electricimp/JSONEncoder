@@ -43,6 +43,7 @@ JSON <- {
           break
 
         case "string":
+          // todo: escape special chars
           r += "\"" + value + "\"";
           break;
 
