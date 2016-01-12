@@ -18,7 +18,8 @@ JSON <- {
 
   /**
    * @param {table|array} val
-   * @param {boolean} root
+   * @param {bool} _isRoot
+   * @param {bool} _isArray
    * @private
    */
  _encode = function (val, _isRoot = true, _isArray = false) {
