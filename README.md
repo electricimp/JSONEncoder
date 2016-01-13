@@ -2,9 +2,6 @@
  
 (decoder is coming)
 
-TODO:
-- special chars escaping in string 
-
 ## Example
 
 ```squirrel
