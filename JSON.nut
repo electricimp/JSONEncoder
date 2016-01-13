@@ -1,11 +1,15 @@
 /**
  * JSON encoder. Decoder is coming.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.0.1
+ * @verion 0.0.2
  */
 JSON <- {
 
-  version = [0, 0, 1],
+  version = [0, 0, 2],
+
+  // max structure depth
+  // anything above is probably a cyclic ref
+  _maxDepth = 32,
 
   /**
    * Encode value to JSON
@@ -13,7 +17,7 @@ JSON <- {
    * @returns {string}
    */
   stringify = function (value) {
-    return JSON._encode(value, true, type(value) == "array");
+    return JSON._encode(value);
   },
 
   /**
@@ -22,59 +26,58 @@ JSON <- {
    * @param {bool} _isArray
    * @private
    */
- _encode = function (val, _isRoot = true, _isArray = false) {
+  _encode = function (val, depth = 0) {
 
-    local r = "";
-
-    foreach (key, value in val) {
-
-      if (!_isArray) {
-        (r += "\"" + key + "\":");
-      }
-
-      switch (type(value)) {
-
-        case "table":
-          r += "{" + JSON._encode(value, false) + "}";
-          break
-
-        case "array":
-          r += "[" + JSON._encode(value, false, true) + "]";
-          break
-
-        case "string":
-          // todo: escape special chars
-          r += "\"" + value + "\"";
-          break;
-
-        case "integer":
-        case "float":
-        case "bool":
-          r += value;
-          break;
-
-        case "null":
-          r += "null";
-          break;
-
-        default:
-          r += "\"" + value + "\"";
-          break;
-      }
-
-      r += ",";
+    // detect cyclic reference
+    if (depth > JSON._maxDepth) {
+      throw "Possible cyclic reference";
     }
 
-    r = r.slice(0, r.len() - 1);
+    local
+      r = "",
+      s = "",
+      i = 0;
 
-    if (_isRoot) {
-      if (_isArray) {
-        return "[" + r + "]";
-      } else {
-        return "{" + r + "}";
-      }
-    } else {
-      return r;
+    switch (type(val)) {
+
+      case "table":
+      case "class":
+        s = "";
+
+        foreach (k, v in val) {
+          s += "," + k + ":" + JSON._encode(v, depth + 1);
+        }
+
+        s = s.len() > 0 ? s.slice(1) : s;
+        r += "{" + s + "}";
+        break;
+
+      case "array":
+        local i = 0
+
+        for (i = 0; i < val.len(); i++) {
+          s += "," + JSON._encode(val[i], depth + 1);
+        }
+
+        s = (i > 1) ? s.slice(1) : s;
+        r += "[" + s + "]";
+        break;
+
+      case "integer":
+      case "float":
+      case "bool":
+        r += val;
+        break;
+
+      case "null":
+        r += "null";
+        break;
+
+      default:
+        r += "\"" + val + "\"";
+        break;
     }
+
+    return r;
   }
 }

@@ -3,7 +3,6 @@
 (decoder is coming)
 
 TODO:
-- cyclic references detection
 - special chars escaping in string 
 - serialization of classes
 
