@@ -1,5 +1,5 @@
 /**
- * JSON encoder. Decoder is coming.
+ * JSON encoder.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
  * @verion 0.1.0
  */
