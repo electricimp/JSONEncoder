@@ -53,7 +53,7 @@ JSON <- {
         break;
 
       case "array":
-        local i = 0
+        s = "";
 
         for (i = 0; i < val.len(); i++) {
           s += "," + JSON._encode(val[i], depth + 1);
