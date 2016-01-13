@@ -13,7 +13,7 @@ JSON <- {
 
   /**
    * Encode value to JSON
-   * @param {table|array} val
+   * @param {table|array|*} value
    * @returns {string}
    */
   stringify = function (value) {
@@ -22,8 +22,7 @@ JSON <- {
 
   /**
    * @param {table|array} val
-   * @param {bool} _isRoot
-   * @param {bool} _isArray
+   * @param {integer=0} depth – current depth level
    * @private
    */
   _encode = function (val, depth = 0) {
