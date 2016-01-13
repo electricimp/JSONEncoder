@@ -29,6 +29,6 @@ server.log(JSON.stringify([1,2]));
 should produce
  
 ```json
-{a:123,c:{field:123},b:[1,2,3,4],e:"(instance : 0x2000ba4c)",d:5.125,g:true,f:null}
+{"a":123,"c":{"field":123},"b":[1,2,3,4],"e":"(instance : 0x2000ba4c)","d":5.125,"g":true,"f":null}
 [1,2]
 ```

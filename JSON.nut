@@ -44,7 +44,7 @@ JSON <- {
         s = "";
 
         foreach (k, v in val) {
-          s += "," + k + ":" + JSON._encode(v, depth + 1);
+          s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
         }
 
         s = s.len() > 0 ? s.slice(1) : s;
