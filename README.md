@@ -4,12 +4,13 @@
 
 TODO:
 - special chars escaping in string 
-- serialization of classes
 
 ## Example
 
 ```squirrel
-class A {}
+class A {
+  field = 123;
+}
 
 t <- {
   a = 123,
@@ -17,7 +18,8 @@ t <- {
   c = A,
   d = 5.125,
   e = A(),
-  f = null
+  f = null,
+  g = true
 };
 
 server.log(JSON.stringify(t));
@@ -27,6 +29,6 @@ server.log(JSON.stringify([1,2]));
 should produce
  
 ```json
-{"a":123,"c":"(class : 0x2000b63c)","b":[1,2,3,4],"e":"(instance : 0x2000b99c)","d":5.125,"f":null}
+{a:123,c:{field:123},b:[1,2,3,4],e:"(instance : 0x2000ba4c)",d:5.125,g:true,f:null}
 [1,2]
 ```
