@@ -8,7 +8,7 @@ JSON <- {
   version = [0, 0, 2],
 
   // max structure depth
-  // anything above is probably a cyclic ref
+  // anything above probably has a cyclic ref
   _maxDepth = 32,
 
   /**
