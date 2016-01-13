@@ -68,6 +68,10 @@ JSON <- {
         r += val;
         break;
 
+      case "string":
+        r += "\"" + this._escape(val) + "\"";
+        break;
+
       case "null":
         r += "null";
         break;
@@ -78,5 +82,66 @@ JSON <- {
     }
 
     return r;
+  },
+
+  /**
+   * Escape strings according to http://www.json.org/ spec
+   * @param {string} str
+   */
+  _escape = function (str) {
+    local res = "";
+
+    for (local i = 0; i < str.len(); i++) {
+
+      local ch1 = (str[i] & 0xFF);
+
+      if ((ch1 & 0x80) == 0x00) {
+        // 7-bit Ascii
+
+        ch1 = format("%c", ch1);
+
+        if (ch1 == "\"") {
+          res += "\\\"";
+        } else if (ch1 == "\\") {
+          res += "\\\\";
+        } else if (ch1 == "/") {
+          res += "\\/";
+        } else if (ch1 == "\b") {
+          res += "\\b";
+        } else if (ch1 == "\f") {
+          res += "\\f";
+        } else if (ch1 == "\n") {
+          res += "\\n";
+        } else if (ch1 == "\r") {
+          res += "\\r";
+        } else if (ch1 == "\t") {
+          res += "\\t";
+        } else {
+          res += ch1;
+        }
+
+      } else {
+
+        if ((ch1 & 0xE0) == 0xC0) {
+          // 110xxxxx = 2-byte unicode
+          local ch2 = (str[++i] & 0xFF)
+          res += format("%c%c", ch1, ch2);
+        } else if ((ch1 & 0xF0) == 0xE0) {
+          // 1110xxxx = 3-byte unicode
+          local ch2 = (str[++i] & 0xFF)
+          local ch3 = (str[++i] & 0xFF)
+          res += format("%c%c%c", ch1, ch2, ch3);
+        } else if ((ch1 & 0xF8) == 0xF0) {
+          // 11110xxx = 4 byte unicode
+          local ch2 = (str[++i] & 0xFF)
+          local ch3 = (str[++i] & 0xFF)
+          local ch4 = (str[++i] & 0xFF)
+          res += format("%c%c%c%c", ch1, ch2, ch3, ch4);
+        }
+
+      }
+    }
+
+    return res;
   }
 }
