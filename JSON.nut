@@ -1,11 +1,11 @@
 /**
- * JSON encoder. Decoder is coming.
+ * JSON encoder.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.1.0
+ * @verion 0.2.0
  */
 JSON <- {
 
-  version = [0, 1, 0],
+  version = [0, 2, 0],
 
   // max structure depth
   // anything above probably has a cyclic ref
@@ -44,7 +44,9 @@ JSON <- {
         s = "";
 
         foreach (k, v in val) {
-          s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
+          if ("_serialize" != k) {
+            s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
+          }
         }
 
         s = s.len() > 0 ? s.slice(1) : s;
@@ -74,6 +76,12 @@ JSON <- {
 
       case "null":
         r += "null";
+        break;
+
+      case "instance":
+        if ("_serialize" in val && type(val._serialize) == "function") {
+          r += JSON._encode(val._serialize());
+        }
         break;
 
       default:
