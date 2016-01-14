@@ -80,7 +80,7 @@ JSON <- {
 
       case "instance":
         if ("_serialize" in val && type(val._serialize) == "function") {
-          r += JSON._encode(val._serialize());
+          r += JSON._encode(val._serialize(), depth + 1);
         }
         break;
 
