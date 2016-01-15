@@ -1,5 +1,9 @@
 # JSON encoder in Squirrel
 
+## Unicode strings
+
+Current implementation suggestts that Squirrel is compiled with single-byte strings (the case for Electric Imp platform) and correctly handles UTF-8 characters.
+
 ## Classes serialization
 
 When serializing classes functions are ignored and only properties are exposed.
