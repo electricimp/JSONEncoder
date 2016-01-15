@@ -12,6 +12,9 @@ class A {
   }
 }
 
+someblob <- blob();
+someblob.writestring("a\ta");
+
 t <- {
   a = 123,
   b = [1, 2, 3, 4],
@@ -20,8 +23,9 @@ t <- {
   e = A(),
   f = null,
   g = true,
-  h = "Some\nùnicode\rstring ø∆ø"
+  h = "Some\nùnicode\rstring ø∆ø",
+  i = someblob
 };
 
 server.log(JSON.stringify(t));
-assert(JSON.stringify(t) == "{\"a\":123,\"c\":{\"_field\":123},\"b\":[1,2,3,4],\"e\":{\"field\":123},\"d\":5.125,\"g\":true,\"f\":null,\"h\":\"Some\\nùnicode\\rstring ø∆ø\"}");
+assert(JSON.stringify(t) == "{\"a\":123,\"c\":{\"_field\":123},\"b\":[1,2,3,4],\"e\":{\"field\":123},\"d\":5.125,\"g\":true,\"f\":null,\"i\":\"a\\ta\",\"h\":\"Some\\nùnicode\\rstring ø∆ø\"}");

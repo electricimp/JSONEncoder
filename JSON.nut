@@ -116,7 +116,7 @@ JSON <- {
         break;
 
       default:
-        r += "\"" + val + "\"";
+        r += "\"" + this._escape(val.tostring()) + "\"";
         break;
     }
 
