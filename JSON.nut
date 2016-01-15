@@ -43,8 +43,9 @@ JSON <- {
       case "class":
         s = "";
 
+        // serialize properties, but not functions
         foreach (k, v in val) {
-          if ("_serialize" != k) {
+          if (type(v) != "function") {
             s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
           }
         }
@@ -99,8 +100,11 @@ JSON <- {
           } catch (e) {
 
             // iterate through instances w/o _nexti
+            // serialize properties, but not functions
             foreach (k, v in val.getclass()) {
-              s += ",\"" + k + "\":" + JSON._encode(val[k], depth + 1);
+              if (type(v) != "function") {
+                s += ",\"" + k + "\":" + JSON._encode(val[k], depth + 1);
+              }
             }
 
           }
