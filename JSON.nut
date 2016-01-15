@@ -1,11 +1,11 @@
 /**
  * JSON encoder.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.3.0
+ * @verion 0.3.1
  */
 JSON <- {
 
-  version = [0, 3, 0],
+  version = [0, 3, 1],
 
   // max structure depth
   // anything above probably has a cyclic ref
@@ -71,10 +71,6 @@ JSON <- {
         r += val;
         break;
 
-      case "string":
-        r += "\"" + this._escape(val) + "\"";
-        break;
-
       case "null":
         r += "null";
         break;
@@ -115,6 +111,7 @@ JSON <- {
 
         break;
 
+      // strings and all other
       default:
         r += "\"" + this._escape(val.tostring()) + "\"";
         break;
