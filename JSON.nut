@@ -1,11 +1,11 @@
 /**
  * JSON encoder.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.3.1
+ * @verion 0.3.2
  */
 JSON <- {
 
-  version = [0, 3, 1],
+  version = [0, 3, 2],
 
   // max structure depth
   // anything above probably has a cyclic ref
