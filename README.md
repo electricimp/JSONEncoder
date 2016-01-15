@@ -1,8 +1,16 @@
 # JSON encoder in Squirrel
 
-## _serialize() metamethod
+## Classes serialization
 
-Instances can contain `_serialize()` metamethod that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
+When serializing classes functions are ignored and only properties are exposed.
+
+## Instances serialization
+
+When serializing Instances functions are ignored and only properties are exposed. If the instance implements `_nexti()` meta-method it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement `_serialize()` method as described below.
+
+### _serialize() method
+
+Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
 
 ## Example
 
@@ -26,16 +34,14 @@ t <- {
   e = A(),
   f = null,
   g = true,
-  h = "Some\nùnicode\rstring\"ø∆ø\""
+  h = "Some\nùnicode\rstring ø∆ø"
 };
 
 server.log(JSON.stringify(t));
-server.log(JSON.stringify([1,2]));
 ```
 
 should produce
 
 ```json
-{"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring\"ø∆ø\""}
-[1,2]
+{"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring ø∆ø"}
 ```
