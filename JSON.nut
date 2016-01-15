@@ -160,18 +160,18 @@ JSON <- {
 
         if ((ch1 & 0xE0) == 0xC0) {
           // 110xxxxx = 2-byte unicode
-          local ch2 = (str[++i] & 0xFF)
+          local ch2 = (str[++i] & 0xFF);
           res += format("%c%c", ch1, ch2);
         } else if ((ch1 & 0xF0) == 0xE0) {
           // 1110xxxx = 3-byte unicode
-          local ch2 = (str[++i] & 0xFF)
-          local ch3 = (str[++i] & 0xFF)
+          local ch2 = (str[++i] & 0xFF);
+          local ch3 = (str[++i] & 0xFF);
           res += format("%c%c%c", ch1, ch2, ch3);
         } else if ((ch1 & 0xF8) == 0xF0) {
           // 11110xxx = 4 byte unicode
-          local ch2 = (str[++i] & 0xFF)
-          local ch3 = (str[++i] & 0xFF)
-          local ch4 = (str[++i] & 0xFF)
+          local ch2 = (str[++i] & 0xFF);
+          local ch3 = (str[++i] & 0xFF);
+          local ch4 = (str[++i] & 0xFF);
           res += format("%c%c%c%c", ch1, ch2, ch3, ch4);
         }
 
