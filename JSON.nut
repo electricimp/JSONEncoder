@@ -43,8 +43,9 @@ JSON <- {
       case "class":
         s = "";
 
+        // serialize properties, but not functions
         foreach (k, v in val) {
-          if ("_serialize" != k) {
+          if (type(v) != "function") {
             s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
           }
         }
@@ -79,9 +80,39 @@ JSON <- {
         break;
 
       case "instance":
+
         if ("_serialize" in val && type(val._serialize) == "function") {
+
+          // serialize instances by calling _serialize method
           r += JSON._encode(val._serialize(), depth + 1);
+
+        } else {
+
+          s = "";
+
+          try {
+
+            // iterate through instances which implement _nexti meta-method
+            foreach (k, v in val) {
+              s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
+            }
+
+          } catch (e) {
+
+            // iterate through instances w/o _nexti
+            // serialize properties, but not functions
+            foreach (k, v in val.getclass()) {
+              if (type(v) != "function") {
+                s += ",\"" + k + "\":" + JSON._encode(val[k], depth + 1);
+              }
+            }
+
+          }
+
+          s = s.len() > 0 ? s.slice(1) : s;
+          r += "{" + s + "}";
         }
+
         break;
 
       default:
