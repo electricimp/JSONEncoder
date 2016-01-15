@@ -71,10 +71,6 @@ JSON <- {
         r += val;
         break;
 
-      case "string":
-        r += "\"" + this._escape(val) + "\"";
-        break;
-
       case "null":
         r += "null";
         break;
@@ -115,6 +111,7 @@ JSON <- {
 
         break;
 
+      // strings and all other
       default:
         r += "\"" + this._escape(val.tostring()) + "\"";
         break;
