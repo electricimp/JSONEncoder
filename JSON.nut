@@ -61,7 +61,7 @@ JSON <- {
           s += "," + JSON._encode(val[i], depth + 1);
         }
 
-        s = (i > 1) ? s.slice(1) : s;
+        s = (i > 0) ? s.slice(1) : s;
         r += "[" + s + "]";
         break;
 
