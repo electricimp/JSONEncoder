@@ -1,11 +1,11 @@
 /**
  * JSON encoder.
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.3.2
+ * @verion 0.3.3
  */
 JSON <- {
 
-  version = [0, 3, 2],
+  version = [0, 3, 3],
 
   // max structure depth
   // anything above probably has a cyclic ref
@@ -61,7 +61,7 @@ JSON <- {
           s += "," + JSON._encode(val[i], depth + 1);
         }
 
-        s = (i > 1) ? s.slice(1) : s;
+        s = (i > 0) ? s.slice(1) : s;
         r += "[" + s + "]";
         break;
 
