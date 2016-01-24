@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [JSON Encoder in Squirrel](#json-encoder-in-squirrel)
+  - [Usage](#usage)
+  - [Unicode Strings](#unicode-strings)
+  - [Classes Serialization](#classes-serialization)
+  - [Instances Serialization](#instances-serialization)
+    - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
+  - [Example](#example)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # JSON Encoder in Squirrel
 
 Encodes Squirrel data structures into JSON.
