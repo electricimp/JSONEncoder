@@ -1,4 +1,4 @@
-// JSON is supposed to be inclided
+// JSONEncoder is supposed to be inclided
 
 class A {
   field = 1
@@ -24,4 +24,6 @@ class C {
   }
 }
 
-assert(JSON.stringify({a=A(),c=C()}) == "{\"a\":{\"field\":2},\"c\":{\"0\":\"c\",\"1\":\"c\"}}");
+s <- JSONEncoder.encode({a=A(),c=C()});
+try { server.log(s) } catch (e) { ::print(s) };
+assert(s == "{\"a\":{\"field\":2},\"c\":{\"0\":\"c\",\"1\":\"c\"}}");
