@@ -1,4 +1,4 @@
-# JSON encoder in Squirrel
+# JSON Encoder in Squirrel
 
 Encodes Squirrel data structures into JSON.
 
