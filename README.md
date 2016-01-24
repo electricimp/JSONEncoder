@@ -1,5 +1,9 @@
 # JSON encoder in Squirrel
 
+Encodes Squirrel data structures into JSON.
+
+__To add this library to your project, add #require "JSONEncoder.class.nut:0.4.0"` to the top of your code.__
+
 ## Usage
 
 ```squirrel
