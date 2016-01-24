@@ -1,8 +1,14 @@
 # JSON encoder in Squirrel
 
+## Usage
+
+```squirrel
+str <- JSONEncoder.encode(data);
+```
+
 ## Unicode strings
 
-Current implementation suggestts that Squirrel is compiled with single-byte strings (the case for Electric Imp platform) and correctly handles UTF-8 characters.
+Current implementation suggests that Squirrel is compiled with single-byte strings (the case for Electric Imp platform) and correctly handles UTF-8 characters.
 
 ## Classes serialization
 
@@ -41,7 +47,7 @@ t <- {
   h = "Some\nùnicode\rstring ø∆ø"
 };
 
-server.log(JSON.stringify(t));
+server.log(JSONEncoder.encode(t));
 ```
 
 should produce
