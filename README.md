@@ -10,6 +10,7 @@
     - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
   - [Example](#example)
   - [License](#license)
+  - [Development](#development)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -79,3 +80,7 @@ should produce
 
 The code in this repository is licensed under [MIT License](https://github.com/electricimp/serializer/tree/master/LICENSE).
 
+## Development
+
+This repository uses [git-flow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
+Please make your pull requests to the __develop__ branch.
