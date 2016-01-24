@@ -1,4 +1,4 @@
-// JSONEncoder is supposed to be inclided
+#require "JSONEncoder.class.nut:0.4.0"
 
 class A {
   field = 1

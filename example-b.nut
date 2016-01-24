@@ -1,4 +1,4 @@
-// JSONEncoder is supposed to be inclided
+#require "JSONEncoder.class.nut:0.4.0"
 
 // contains _serialize function to allow custom representation of an instance
 class A {
