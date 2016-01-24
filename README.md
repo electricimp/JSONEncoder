@@ -9,6 +9,7 @@
   - [Instances Serialization](#instances-serialization)
     - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
   - [Example](#example)
+  - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -73,3 +74,8 @@ should produce
 ```json
 {"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring ø∆ø"}
 ```
+
+## License
+
+The code in this repository is licensed under [MIT License](https://github.com/electricimp/serializer/tree/master/LICENSE).
+
