@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [JSON Encoder in Squirrel](#json-encoder-in-squirrel)
+- [JSON Encoder](#json-encoder)
   - [Usage](#usage)
   - [Unicode Strings](#unicode-strings)
   - [Classes Serialization](#classes-serialization)
@@ -12,7 +12,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# JSON Encoder in Squirrel
+# JSON Encoder
 
 Encodes Squirrel data structures into JSON.
 
