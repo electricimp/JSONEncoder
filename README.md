@@ -10,19 +10,19 @@ _To add this library to your project, add **#require "JSONEncoder.class.nut:0.4.
 str <- JSONEncoder.encode(data);
 ```
 
-## Unicode strings
+## Unicode Strings
 
 Current implementation suggests that Squirrel is compiled with single-byte strings (the case for Electric Imp platform) and correctly handles UTF-8 characters.
 
-## Classes serialization
+## Classes Serialization
 
 When serializing classes functions are ignored and only properties are exposed.
 
-## Instances serialization
+## Instances Serialization
 
 When serializing Instances functions are ignored and only properties are exposed. If the instance implements `_nexti()` meta-method it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement `_serialize()` method as described below.
 
-### \_serialize() method
+### Custom Serialization with \_serialize() Method
 
 Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
 
