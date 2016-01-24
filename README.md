@@ -22,7 +22,7 @@ When serializing classes functions are ignored and only properties are exposed.
 
 When serializing Instances functions are ignored and only properties are exposed. If the instance implements `_nexti()` meta-method it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement `_serialize()` method as described below.
 
-### _serialize() method
+### \_serialize() method
 
 Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
 
