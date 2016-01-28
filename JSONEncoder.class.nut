@@ -1,34 +1,35 @@
 /**
- * JSON encoder.
+ * JSON encoder
+ *
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.3.3
+ * @verion 0.4.0
  */
-JSON <- {
+class JSONEncoder {
 
-  version = [0, 3, 3],
+  static version = [0, 4, 0];
 
   // max structure depth
   // anything above probably has a cyclic ref
-  _maxDepth = 32,
+  static _maxDepth = 32;
 
   /**
    * Encode value to JSON
    * @param {table|array|*} value
    * @returns {string}
    */
-  stringify = function (value) {
-    return JSON._encode(value);
-  },
+  function encode(value) {
+    return this._encode(value);
+  }
 
   /**
    * @param {table|array} val
    * @param {integer=0} depth – current depth level
    * @private
    */
-  _encode = function (val, depth = 0) {
+  function _encode(val, depth = 0) {
 
     // detect cyclic reference
-    if (depth > JSON._maxDepth) {
+    if (depth > this._maxDepth) {
       throw "Possible cyclic reference";
     }
 
@@ -37,7 +38,7 @@ JSON <- {
       s = "",
       i = 0;
 
-    switch (type(val)) {
+    switch (typeof val) {
 
       case "table":
       case "class":
@@ -45,8 +46,8 @@ JSON <- {
 
         // serialize properties, but not functions
         foreach (k, v in val) {
-          if (type(v) != "function") {
-            s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
+          if (typeof v != "function") {
+            s += ",\"" + k + "\":" + this._encode(v, depth + 1);
           }
         }
 
@@ -58,7 +59,7 @@ JSON <- {
         s = "";
 
         for (i = 0; i < val.len(); i++) {
-          s += "," + JSON._encode(val[i], depth + 1);
+          s += "," + this._encode(val[i], depth + 1);
         }
 
         s = (i > 0) ? s.slice(1) : s;
@@ -77,10 +78,10 @@ JSON <- {
 
       case "instance":
 
-        if ("_serialize" in val && type(val._serialize) == "function") {
+        if ("_serialize" in val && typeof val._serialize == "function") {
 
           // serialize instances by calling _serialize method
-          r += JSON._encode(val._serialize(), depth + 1);
+          r += this._encode(val._serialize(), depth + 1);
 
         } else {
 
@@ -90,7 +91,7 @@ JSON <- {
 
             // iterate through instances which implement _nexti meta-method
             foreach (k, v in val) {
-              s += ",\"" + k + "\":" + JSON._encode(v, depth + 1);
+              s += ",\"" + k + "\":" + this._encode(v, depth + 1);
             }
 
           } catch (e) {
@@ -98,8 +99,8 @@ JSON <- {
             // iterate through instances w/o _nexti
             // serialize properties, but not functions
             foreach (k, v in val.getclass()) {
-              if (type(v) != "function") {
-                s += ",\"" + k + "\":" + JSON._encode(val[k], depth + 1);
+              if (typeof v != "function") {
+                s += ",\"" + k + "\":" + this._encode(val[k], depth + 1);
               }
             }
 
@@ -118,13 +119,13 @@ JSON <- {
     }
 
     return r;
-  },
+  }
 
   /**
    * Escape strings according to http://www.json.org/ spec
    * @param {string} str
    */
-  _escape = function (str) {
+  function _escape(str) {
     local res = "";
 
     for (local i = 0; i < str.len(); i++) {
