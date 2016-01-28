@@ -38,7 +38,7 @@ class JSONEncoder {
       s = "",
       i = 0;
 
-    switch (type(val)) {
+    switch (typeof val) {
 
       case "table":
       case "class":
@@ -46,7 +46,7 @@ class JSONEncoder {
 
         // serialize properties, but not functions
         foreach (k, v in val) {
-          if (type(v) != "function") {
+          if (typeof v != "function") {
             s += ",\"" + k + "\":" + this._encode(v, depth + 1);
           }
         }
@@ -78,7 +78,7 @@ class JSONEncoder {
 
       case "instance":
 
-        if ("_serialize" in val && type(val._serialize) == "function") {
+        if ("_serialize" in val && typeof val._serialize == "function") {
 
           // serialize instances by calling _serialize method
           r += this._encode(val._serialize(), depth + 1);
@@ -99,7 +99,7 @@ class JSONEncoder {
             // iterate through instances w/o _nexti
             // serialize properties, but not functions
             foreach (k, v in val.getclass()) {
-              if (type(v) != "function") {
+              if (typeof v != "function") {
                 s += ",\"" + k + "\":" + this._encode(val[k], depth + 1);
               }
             }
