@@ -112,6 +112,17 @@ class JSONEncoder {
 
         break;
 
+      // include value produced by _tosting() or _serialize() as-is
+      case "raw":
+
+        if ("_serialize" in val && typeof val._serialize == "function") {
+          r += val._serialize().tostring();
+        } else {
+          r += val.tostring();
+        }
+
+       break;
+
       // strings and all other
       default:
         r += "\"" + this._escape(val.tostring()) + "\"";
