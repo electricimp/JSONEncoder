@@ -8,6 +8,7 @@
   - [Classes Serialization](#classes-serialization)
   - [Instances Serialization](#instances-serialization)
     - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
+      - [Serializing As-is](#serializing-as-is)
   - [Example](#example)
   - [License](#license)
   - [Development](#development)
@@ -18,7 +19,7 @@
 
 Encodes Squirrel data structures into JSON.
 
-_To add this library to your project, add **#require "JSONEncoder.class.nut:0.4.0"** to the top of your code._
+_To add this library to your project, add **#require "JSONEncoder.class.nut:0.5.0"** to the top of your code._
 
 ## Usage
 
@@ -41,6 +42,48 @@ When serializing Instances functions are ignored and only properties are exposed
 ### Custom Serialization with \_serialize() Method
 
 Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
+
+#### Serializing As-is
+
+In some cases it may be useful to provide a "raw" value to the JSON encoder. In order to do so, an instance can define a `_typeof()` meta-method returning "raw". The *string* value returned by `_serialize()` or `_tosting()` is then inserted into resulting JSON output without further processing or escaping.
+
+Here is an example of two ways of as-is serialization:
+
+```squirrel
+// class with _typeof() & _serialize()
+class A {
+  function _serialize() {
+    // very long integer
+    return "12345678901234567890"
+  }
+
+  function _typeof() {
+    return "raw";
+  }
+};
+
+// class with _typeof() and _tostring()
+class B {
+  function _tostring() {
+    // very long integer
+    return "12345678901234567890"
+  }
+
+  function _typeof() {
+    return "raw";
+  }
+};
+
+server.log(JSONEncoder.encode([A(), B()]));
+```
+
+outputs
+
+```json
+[12345678901234567890, 12345678901234567890]
+```
+
+Note that while this method may be useful, it has the potential to produce non-valid JSON output.
 
 ## Example
 
