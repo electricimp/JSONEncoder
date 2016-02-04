@@ -42,6 +42,48 @@ When serializing Instances functions are ignored and only properties are exposed
 
 Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
 
+#### Serializing As-is
+
+In some cases it may be useful to provide a "raw" value to the JSON encoder. In order to do so, an instance can define a `_typeof()` meta-method returning "raw". The *string* value returned by `_serialize()` or `_tosting()` is then inserted into resulting JSON output without further processing or escaping.
+
+Here is an example of two ways of serialization with "raw" values:
+
+```squirrel
+// class with _typeof() & _serialize()
+class A {
+  function _serialize() {
+    // very long integer
+    return "12345678901234567890"
+  }
+
+  function _typeof() {
+    return "raw";
+  }
+};
+
+// class with _typeof() and _tostring()
+class B {
+  function _tostring() {
+    // very long integer
+    return "12345678901234567890"
+  }
+
+  function _typeof() {
+    return "raw";
+  }
+};
+
+server.log(JSONEncoder.encode([A(), B()]));
+```
+
+outputs
+
+```json
+[12345678901234567890, 12345678901234567890]
+```
+
+Note that while this method may have certain uses, it has the potential to produce non-valid JSON output.
+
 ## Example
 
 ```squirrel
