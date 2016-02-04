@@ -8,6 +8,7 @@
   - [Classes Serialization](#classes-serialization)
   - [Instances Serialization](#instances-serialization)
     - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
+      - [Serializing As-is](#serializing-as-is)
   - [Example](#example)
   - [License](#license)
   - [Development](#development)
