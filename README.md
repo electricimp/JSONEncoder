@@ -47,7 +47,7 @@ Instances can contain `_serialize()` method that is called during the encoding t
 
 In some cases it may be useful to provide a "raw" value to the JSON encoder. In order to do so, an instance can define a `_typeof()` meta-method returning "raw". The *string* value returned by `_serialize()` or `_tosting()` is then inserted into resulting JSON output without further processing or escaping.
 
-Here is an example of two ways of serialization with "raw" values:
+Here is an example of two ways of as-is serialization:
 
 ```squirrel
 // class with _typeof() & _serialize()
@@ -83,7 +83,7 @@ outputs
 [12345678901234567890, 12345678901234567890]
 ```
 
-Note that while this method may have certain uses, it has the potential to produce non-valid JSON output.
+Note that while this method may be useful, it has the potential to produce non-valid JSON output.
 
 ## Example
 
