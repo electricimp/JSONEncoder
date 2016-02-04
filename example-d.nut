@@ -1,4 +1,4 @@
-#require "JSONEncoder.class.nut:0.4.0"
+#require "JSONEncoder.class.nut:0.5.0"
 
 // class with _typeof()
 class rawTypeof {
