@@ -2,11 +2,11 @@
  * JSON encoder
  *
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.5.0
+ * @verion 0.6.0
  */
 class JSONEncoder {
 
-  static version = [0, 5, 0];
+  static version = [0, 6, 0];
 
   // max structure depth
   // anything above probably has a cyclic ref

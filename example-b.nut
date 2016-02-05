@@ -1,4 +1,4 @@
-#require "JSONEncoder.class.nut:0.5.0"
+#require "JSONEncoder.class.nut:0.6.0"
 
 // contains _serialize function to allow custom representation of an instance
 class A {
