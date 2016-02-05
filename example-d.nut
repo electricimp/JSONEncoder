@@ -1,34 +1,25 @@
-#require "JSONEncoder.class.nut:0.5.0"
+#require "JSONEncoder.class.nut:0.6.0"
 
-// class with _typeof()
-class rawTypeof {
+/**
+ * Example of as-is serialization
+ */
+
+// value returned by _serialize() is then encoded further
+class serializeClass {
   function _serialize() {
-    return "@something"
-  }
-
-  function _typeof() {
-    return "raw";
+    // very long integer
+    return "12345678901234567890"
   }
 };
 
-// class with _typeof() and _tostring()
-class rawTypeofWithToString {
-  function _tostring() {
-    return "@something"
-  }
-
-  function _typeof() {
-    return "raw";
+// value returned by _serializeRaw() is then encoded further
+class serializeRawClass {
+  function _serializeRaw() {
+    // very long integer
+    return "12345678901234567890"
   }
 };
 
-// class without _typeof()
-class instanceTypeof {
-  function _serialize() {
-    return "@something"
-  }
-};
-
-s <- JSONEncoder.encode({r1 = rawTypeof(), r2 = rawTypeofWithToString(), i = instanceTypeof()});
+s <- JSONEncoder.encode({i1 = serializeClass(), i2 = serializeRawClass()});
 server.log(s);
-// == {"i":"@something","r1":@something,"r2":@something}
+// == {"i1":"12345678901234567890","i2":12345678901234567890}

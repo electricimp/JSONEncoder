@@ -19,7 +19,7 @@
 
 Encodes Squirrel data structures into JSON.
 
-_To add this library to your project, add **#require "JSONEncoder.class.nut:0.5.0"** to the top of your code._
+_To add this library to your project, add **#require "JSONEncoder.class.nut:0.6.0"** to the top of your code._
 
 ## Usage
 
@@ -45,45 +45,28 @@ Instances can contain `_serialize()` method that is called during the encoding t
 
 #### Serializing As-is
 
-In some cases it may be useful to provide a "raw" value to the JSON encoder. In order to do so, an instance can define a `_typeof()` meta-method returning "raw". The *string* value returned by `_serialize()` or `_tosting()` is then inserted into resulting JSON output without further processing or escaping.
+In some cases it may be useful to provide a "raw" representation of an instance to the JSON encoder. In order to do so an instance can define a `_serializeRaw()` method returning a *string* value. This value is then inserted into the resulting JSON output without further processing or escaping.
 
-Here is an example of two ways of as-is serialization:
+Here is an example:
 
 ```squirrel
-// class with _typeof() & _serialize()
 class A {
-  function _serialize() {
+  function _serializeRaw() {
     // very long integer
     return "12345678901234567890"
   }
-
-  function _typeof() {
-    return "raw";
-  }
 };
 
-// class with _typeof() and _tostring()
-class B {
-  function _tostring() {
-    // very long integer
-    return "12345678901234567890"
-  }
-
-  function _typeof() {
-    return "raw";
-  }
-};
-
-server.log(JSONEncoder.encode([A(), B()]));
+server.log(JSONEncoder.encode([A()]));
 ```
 
 outputs
 
 ```json
-[12345678901234567890, 12345678901234567890]
+[12345678901234567890]
 ```
 
-Note that while this method may be useful, it has the potential to produce non-valid JSON output.
+Note that while this method may be useful in certain cases, it has the potential to produce a non-valid JSON output.
 
 ## Example
 

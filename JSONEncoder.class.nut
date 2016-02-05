@@ -2,11 +2,11 @@
  * JSON encoder
  *
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.5.0
+ * @verion 0.6.0
  */
 class JSONEncoder {
 
-  static version = [0, 5, 0];
+  static version = [0, 6, 0];
 
   // max structure depth
   // anything above probably has a cyclic ref
@@ -78,7 +78,12 @@ class JSONEncoder {
 
       case "instance":
 
-        if ("_serialize" in val && typeof val._serialize == "function") {
+        if ("_serializeRaw" in val && typeof val._serializeRaw == "function") {
+
+            // include value produced by _serializeRaw()
+            r += val._serializeRaw().tostring();
+
+        } else if ("_serialize" in val && typeof val._serialize == "function") {
 
           // serialize instances by calling _serialize method
           r += this._encode(val._serialize(), depth + 1);
@@ -111,17 +116,6 @@ class JSONEncoder {
         }
 
         break;
-
-      // include value produced by _tosting() or _serialize() as-is
-      case "raw":
-
-        if ("_serialize" in val && typeof val._serialize == "function") {
-          r += val._serialize().tostring();
-        } else {
-          r += val.tostring();
-        }
-
-       break;
 
       // strings and all other
       default:
