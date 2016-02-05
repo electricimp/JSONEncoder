@@ -19,7 +19,7 @@
 
 Encodes Squirrel data structures into JSON.
 
-_To add this library to your project, add **#require "JSONEncoder.class.nut:0.5.0"** to the top of your code._
+_To add this library to your project, add **#require "JSONEncoder.class.nut:0.6.0"** to the top of your code._
 
 ## Usage
 
