@@ -10,8 +10,7 @@ class A {
   }
 }
 
-
-class BasicTestCase extends ImpTestCase {
+class CustomTypeTestCase extends ImpTestCase {
 
   function test01() {
     local someblob = blob();
