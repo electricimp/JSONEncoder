@@ -15,6 +15,10 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<br />
+ 
+[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
+
 # JSON Encoder
 
 Encodes Squirrel data structures into JSON.
