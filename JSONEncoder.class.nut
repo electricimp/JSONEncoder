@@ -158,6 +158,8 @@ class JSONEncoder {
           res += "\\r";
         } else if (ch1 == "\t") {
           res += "\\t";
+        } else if (ch1 == "\0") {
+          res += "\\u0000";
         } else {
           res += ch1;
         }
