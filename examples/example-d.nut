@@ -1,4 +1,4 @@
-#require "JSONEncoder.class.nut:0.6.0"
+#require "JSONEncoder.class.nut:0.7.0"
 
 /**
  * Example of as-is serialization
