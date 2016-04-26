@@ -2,7 +2,7 @@
  * JSON encoder
  *
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.6.0
+ * @verion 0.7.0
  */
 class JSONEncoder {
 
@@ -158,6 +158,8 @@ class JSONEncoder {
           res += "\\r";
         } else if (ch1 == "\t") {
           res += "\\t";
+        } else if (ch1 == "\0") {
+          res += "\\u0000";
         } else {
           res += ch1;
         }

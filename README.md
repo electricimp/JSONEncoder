@@ -15,11 +15,15 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<br />
+ 
+[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
+
 # JSON Encoder
 
 Encodes Squirrel data structures into JSON.
 
-_To add this library to your project, add **#require "JSONEncoder.class.nut:0.6.0"** to the top of your code._
+_To add this library to your project, add **#require "JSONEncoder.class.nut:0.7.0"** to the top of your code._
 
 ## Usage
 
