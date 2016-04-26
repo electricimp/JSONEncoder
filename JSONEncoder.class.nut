@@ -2,7 +2,7 @@
  * JSON encoder
  *
  * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.6.0
+ * @verion 0.7.0
  */
 class JSONEncoder {
 
