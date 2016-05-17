@@ -69,13 +69,11 @@ class A {
   }
 };
 
-server.log(JSONEncoder.encode([A()]));
-```
-
-This outputs:
-
-```json
-[12345678901234567890]
+value <- JSONEncoder.encode( [ A() ] );
+server.log(typeof value);
+// == string
+server.log(value);
+// == [12345678901234567890]
 ```
 
 **Note:** that while this method may be useful in certain cases, it has the potential to produce a non-valid JSON output.
@@ -111,6 +109,7 @@ server.log(JSONEncoder.encode(t));
 should produce
 
 ```json
+// JSON string
 {"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring ø∆ø"}
 ```
 
