@@ -31,7 +31,7 @@ JSONEncoder has no constructor and one public function *encode*.
 
 ### encode(*data*)
 
-The **encode** method takes one required parameter the data and returns a stringified version of that data.
+The **encode** method takes one required parameter the data to be encoded and returns a stringified version of that data.
 
 ###### Basic Example:
 
@@ -53,12 +53,12 @@ The class’ current implementation suggests that Squirrel is compiled with sing
 When serializing classes, functions are ignored and only properties are exposed.
 
 ##### Instance Serialization
-When serializing instances, functions are ignored and only properties are exposed. If the instance implements the *_nexti()* metamethod, it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement *_serialize()* method as described below.
+When serializing instances, functions are ignored and only properties are exposed. If the instance implements the *_nexti()* metamethod, it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement a *_serialize()* method in your class.
 
-##### Custom Serialization with \_serialize() Method
+###### Custom Serialization with \_serialize() Method
 Instances can contain a *_serialize()* method that is called during the encoding to get the representation of an instance as (for example) a table or an array. See the extended example below.
 
-##### Serializing As-is
+###### Serializing As-is
 In some cases it may be useful to provide a ‘raw’ representation of an instance to the JSON encoder. In order to do so, an instance can define a *_serializeRaw()* method returning a string value. This value is then inserted into the resulting JSON output without further processing or escaping.
 
 ```squirrel
