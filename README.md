@@ -21,50 +21,50 @@
 
 # JSON Encoder
 
-Encodes Squirrel data structures into JSON.
+This library can be used to encode Squirrel data structures into JSON.
 
-_To add this library to your project, add **#require "JSONEncoder.class.nut:0.7.0"** to the top of your code._
+`To add this library to your project, add` **#require "JSONEncoder.class.nut:0.7.0"** `to the top of your code.`
 
 ## Usage
 
 ```squirrel
-str <- JSONEncoder.encode(data);
+jsonString <- JSONEncoder.encode(data);
 ```
 
 ## Unicode Strings
 
-Current implementation suggests that Squirrel is compiled with single-byte strings (the case for Electric Imp platform) and correctly handles UTF-8 characters.
+The class’ current implementation suggests that Squirrel is compiled with single-byte strings (as is the case with the Electric Imp Platform) and correctly handles UTF-8 characters.
 
-## Classes Serialization
+## Class Serialization
 
-When serializing classes functions are ignored and only properties are exposed.
+When serializing classes, functions are ignored and only properties are exposed.
 
-## Instances Serialization
+## Instance Serialization
 
-When serializing Instances functions are ignored and only properties are exposed. If the instance implements `_nexti()` meta-method it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement `_serialize()` method as described below.
+When serializing instances, functions are ignored and only properties are exposed. If the instance implements the *_nexti()* metamethod, it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement *_serialize()* method as described below.
 
 ### Custom Serialization with \_serialize() Method
 
-Instances can contain `_serialize()` method that is called during the encoding to get the representation of an instance as (for example) table or array. See an example below.
+Instances can contain a *_serialize()* method that is called during the encoding to get the representation of an instance as (for example) a table or an array. See the example below.
 
 #### Serializing As-is
 
-In some cases it may be useful to provide a "raw" representation of an instance to the JSON encoder. In order to do so an instance can define a `_serializeRaw()` method returning a *string* value. This value is then inserted into the resulting JSON output without further processing or escaping.
+In some cases it may be useful to provide a ‘raw’ representation of an instance to the JSON encoder. In order to do so, an instance can define a *_serializeRaw()* method returning a string value. This value is then inserted into the resulting JSON output without further processing or escaping.
 
 Here is an example:
 
 ```squirrel
 class A {
   function _serializeRaw() {
-    // very long integer
-    return "12345678901234567890"
+    // Very long integer
+    return "12345678901234567890";
   }
 };
 
 server.log(JSONEncoder.encode([A()]));
 ```
 
-outputs
+This outputs:
 
 ```json
 [12345678901234567890]
