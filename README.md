@@ -44,7 +44,7 @@ server.log(jsonString);
 // == {"one":1}
 ```
 
-#### Serialization
+#### Serialization Details
 
 ##### Unicode Strings
 The class’ current implementation suggests that Squirrel is compiled with single-byte strings (as is the case with the Electric Imp Platform) and correctly handles UTF-8 characters.
@@ -104,14 +104,10 @@ t <- {
 };
 
 server.log(JSONEncoder.encode(t));
+// == {"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring ø∆ø"}
+// this output is a JSON string
 ```
 
-should produce
-
-```json
-// JSON string
-{"a":123,"c":{"_field":123},"b":[1,2,3,4],"e":{"field":123},"d":5.125,"g":true,"f":null,"h":"Some\nùnicode\rstring ø∆ø"}
-```
 
 ## License
 
