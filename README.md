@@ -31,7 +31,7 @@ JSONEncoder has no constructor and one public function, *encode()*.
 
 ### encode(*data*)
 
-The **encode()** method takes one required parameter: the data to be encoded. It returns a JSON string version of that data.
+The *encode()* method takes one required parameter: the data to be encoded. It returns a JSON string version of that data.
 
 #### Basic Example:
 
