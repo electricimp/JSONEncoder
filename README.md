@@ -2,9 +2,9 @@
 
 This library can be used to encode Squirrel data structures into JSON.
 
-[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
-
 **To add this library to your project, add** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your code.**
+
+[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
 
 ## Usage
 
