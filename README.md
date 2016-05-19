@@ -1,27 +1,8 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [JSON Encoder](#json-encoder)
-  - [Usage](#usage)
-  - [Unicode Strings](#unicode-strings)
-  - [Classes Serialization](#classes-serialization)
-  - [Instances Serialization](#instances-serialization)
-    - [Custom Serialization with \_serialize() Method](#custom-serialization-with-%5C_serialize-method)
-      - [Serializing As-is](#serializing-as-is)
-  - [Example](#example)
-  - [License](#license)
-  - [Development](#development)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-<br />
-
-[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
-
 # JSON Encoder
 
 This library can be used to encode Squirrel data structures into JSON.
+
+[![Build Status](https://travis-ci.org/electricimp/JSONEncoder.svg?branch=develop)](https://travis-ci.org/electricimp/JSONEncoder)
 
 **To add this library to your project, add** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your code.**
 
@@ -114,8 +95,3 @@ server.log(JSONEncoder.encode(t));
 ## License
 
 The code in this repository is licensed under [MIT License](https://github.com/electricimp/serializer/tree/master/LICENSE).
-
-## Development
-
-This repository uses [git-flow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
-Please make your pull requests to the __develop__ branch.
