@@ -1,4 +1,4 @@
-#require "JSONEncoder.class.nut:0.7.0"
+#require "JSONEncoder.class.nut:1.0.0"
 
 t <- {
   a = 123,
