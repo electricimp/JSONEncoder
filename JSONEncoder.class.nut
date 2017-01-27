@@ -6,7 +6,7 @@
  */
 class JSONEncoder {
 
-  static version = [1, 0, 1];
+  static VERSION = "1.0.1";
 
   // max structure depth
   // anything above probably has a cyclic ref
