@@ -117,6 +117,13 @@ class JSONEncoder {
 
         break;
 
+      case "blob":
+        // This is a workaround for a known bug:
+        // on device side Blob.tostring() returns null
+        // (instaead of an empty string)
+        r += "\"" + (val.len() ? this._escape(val.tostring()) : "") + "\"";
+        break;
+
       // strings and all other
       default:
         r += "\"" + this._escape(val.tostring()) + "\"";
