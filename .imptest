@@ -1,10 +1,10 @@
 {
-    "modelId": "hWicA8ierxus" /* Vimp.2 */,
+    "modelId": "pSrGKzgpqPO6" /* A */,
     "devices": [
-        "4353450000000002" /* EI.Test.Vimp.2 @ JSONEncoder lib */
+        "23349c7838a609ee" /* A */
     ],
     "agentFile": "JSONEncoder.class.nut",
-    "deviceFile": false,
+    "deviceFile": "JSONEncoder.class.nut",
     "stopOnFailure": false,
     "timeout": 10,
     "tests": [

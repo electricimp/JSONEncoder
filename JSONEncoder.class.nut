@@ -1,12 +1,10 @@
-/**
- * JSON encoder
- *
- * @author Mikhail Yurasov <mikhail@electricimp.com>
- * @verion 0.7.0
- */
+// Copyright (c) 2017 Electric Imp
+// This file is licensed under the MIT License
+// http://opensource.org/licenses/MIT
+
 class JSONEncoder {
 
-  static version = [1, 0, 0];
+  static VERSION = "2.0.0";
 
   // max structure depth
   // anything above probably has a cyclic ref
@@ -115,6 +113,13 @@ class JSONEncoder {
           r += "{" + s + "}";
         }
 
+        break;
+
+      case "blob":
+        // This is a workaround for a known bug:
+        // on device side Blob.tostring() returns null
+        // (instaead of an empty string)
+        r += "\"" + (val.len() ? this._escape(val.tostring()) : "") + "\"";
         break;
 
       // strings and all other
