@@ -1,3 +1,7 @@
+// Copyright (c) 2017 Electric Imp
+// This file is licensed under the MIT License
+// http://opensource.org/licenses/MIT
+
 // iterated in a custom way
 class C {
 
