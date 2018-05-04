@@ -1,0 +1,13 @@
+{
+  "deviceGroupId": "8bfcc027-a053-f959-3f68-172ca7f34243",
+  "timeout": 30,
+  "stopOnFail": false,
+  "allowDisconnect": false,
+  "builderCache": false,
+  "testFiles": [
+    "*.test.nut",
+    "tests/**/*.test.nut"
+  ],
+  "deviceFile": "JSONEncoder.class.nut",
+  "agentFile" : "JSONEncoder.class.nut"
+}
