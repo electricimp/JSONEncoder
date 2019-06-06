@@ -98,10 +98,10 @@ class JSONEncoder {
                 break;
 
             case "blob":
-                // This is a workaround for a known bug:
-                // on device side Blob.tostring() returns null
-                // (instaead of an empty string)
-                r += "\"" + (val.len() ? this._escape(val.tostring()) : "") + "\"";
+                // Workaround a known bug: on device side Blob.tostring()
+                // returns null instead of an empty string. And base64-encode
+                // the blob as per http.jsonencode() page suggests.
+                r += "\"" + (val.len() ? this._base64encode(val) : "") + "\"";
                 break;
 
             // Strings and all other
@@ -182,6 +182,36 @@ class JSONEncoder {
         }
 
         return res;
+    }
+
+    function _base64encode(input) {
+        local charStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        local output = "";
+        // Copy the input as it may be changed by the code below
+        local data = input.tostring();
+        // Add one or two padding bytes
+        while (data.len() % 3 != 0) data += "\x0";
+        // Perform the encode
+        for (local i = 0 ; i < data.len() ; i += 3) {
+            local bitfield = (data[i] << 16) | (data[i + 1] << 8) | data[i + 2];
+            local padFlag = false;
+            for (local j = 0 ; j < 4 ; j++) {
+                local shift = 6 * (3 - j);
+                local group = (bitfield & (0x3F << shift)) >> shift;
+                // Display the base64 padding indicators as required
+                if (g == 0 && padFlag) {
+                    op += "==".slice(0, 4 - j);
+                    break;
+                }
+                // Display the current character
+                output += charStr[group].tochar();
+                padFlag = false;
+                // Check for what may be the last 'nibble'
+                if (j == 1 && (g & 0x0F) == 0) padFlag = true;
+                if (j == 2 && (g & 0x03) == 0) padFlag = true;
+            }
+        }
+        return output;
     }
 
     function _toHex(i, l = 2) {
