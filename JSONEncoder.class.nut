@@ -104,7 +104,7 @@ class JSONEncoder {
                 r += "\"" + (val.len() ? this._base64encode(val) : "") + "\"";
                 break;
 
-            // Strings and all other
+            // Strings and all other types
             default:
                 r += "\"" + this._escape(val.tostring()) + "\"";
                 break;
@@ -199,7 +199,7 @@ class JSONEncoder {
                 local shift = 6 * (3 - j);
                 local group = (bitfield & (0x3F << shift)) >> shift;
                 // Display the base64 padding indicators as required
-                if (g == 0 && padFlag) {
+                if (group == 0 && padFlag) {
                     op += "==".slice(0, 4 - j);
                     break;
                 }
@@ -207,8 +207,8 @@ class JSONEncoder {
                 output += charStr[group].tochar();
                 padFlag = false;
                 // Check for what may be the last 'nibble'
-                if (j == 1 && (g & 0x0F) == 0) padFlag = true;
-                if (j == 2 && (g & 0x03) == 0) padFlag = true;
+                if (j == 1 && (group & 0x0F) == 0) padFlag = true;
+                if (j == 2 && (group & 0x03) == 0) padFlag = true;
             }
         }
         return output;
