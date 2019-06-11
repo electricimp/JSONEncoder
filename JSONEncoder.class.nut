@@ -200,7 +200,7 @@ class JSONEncoder {
                 local group = (bitfield & (0x3F << shift)) >> shift;
                 // Display the base64 padding indicators as required
                 if (group == 0 && padFlag) {
-                    op += "==".slice(0, 4 - j);
+                    output += "==".slice(0, 4 - j);
                     break;
                 }
                 // Display the current character
