@@ -33,6 +33,14 @@ server.log(jsonString);
 
 The class’ current implementation suggests that Squirrel is compiled with single-byte strings (as is the case with the Electric Imp Platform) and correctly handles UTF-8 characters.
 
+### Binary Strings ###
+
+Binary strings may be interpreted as Unicode strings. We recommend adding binary strings as blobs.
+
+### Blobs ###
+
+Blobs are stored as base64-encoded strings.
+
 ### Class Serialization ###
 
 When serializing classes, functions are ignored and only properties are exposed.
