@@ -184,6 +184,12 @@ class JSONEncoder {
         return res;
     }
 
+    /**
+     * Base64-encode the supplied string.
+     * @param {string} input - The input string.
+     * @returns {string} - The base64 encode.
+     * @private
+    */
     function _base64encode(input) {
         local charStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         local output = "";
@@ -214,9 +220,16 @@ class JSONEncoder {
         return output;
     }
 
-    function _toHex(i, l = 2) {
-        if (l % 2 != 0) l++;
-        local fs = "%0" + l.tostring() + "x";
+    /**
+     * Convert integer to hex string.
+     * @param {integer} i - The input integer value.
+     * @param {integer} n - The number of digits in the output. Default: 2
+     * @returns {string} - The hex string output.
+     * @private
+    */
+    function _toHex(i, n = 2) {
+        if (n % 2 != 0) n++;
+        local fs = "%0" + n.tostring() + "x";
         return format(fs, i);
     }
 }
