@@ -39,17 +39,28 @@ Binary strings may be interpreted as Unicode strings. We recommend adding binary
 
 ### Blobs ###
 
-Blobs are stored as base64-encoded strings.
+Blobs are stored as base64-encoded strings *(from version 2.0.1)*.
 
-### Class Serialization ###
+```squirrel
+local b = blob(144);
+b.writestring("Welcome to the Electric Imp Dev Center. We’ve collected everything you’ll need to build great connected products with the Electric Imp Platform.")
+
+local j = JSONEncoder.encode({"a_blob":b});
+server.log(j);
+
+// Logs:
+// {"a_blob":"V2VsY29tZSB0byB0aGUgRWxlY3RyaWMgSW1wIERldiBDZW50ZXIuIFdl4oCZdmUgY29sbGVjdGVkIGV2ZXJ5dGhpbmcgeW914oCZbGwgbmVlZCB0byBidWlsZCBncmVhdCBjb25uZWN0ZWQgcHJvZHVjdHMgd2l0aCB0aGUgRWxlY3RyaWMgSW1wIFBsYXRmb3JtLg=="}
+```
+
+### Classes ###
 
 When serializing classes, functions are ignored and only properties are exposed.
 
-### Instance Serialization ###
+### Instances ###
 
 When serializing instances, functions are ignored and only properties are exposed. If the instance implements the *_nexti()* metamethod, it can define a custom serialization behavior. Another way for defining custom representation in JSON is to implement a *_serialize()* method in your class.
 
-#### Custom Serialization with \_serialize() Method ###
+#### Custom Serialization with the \_serialize() Method ###
 
 Instances can contain a *_serialize()* method that is called during the encoding to get the representation of an instance as (for example) a table or an array. See the extended example below.
 
