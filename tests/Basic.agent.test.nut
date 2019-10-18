@@ -34,7 +34,7 @@ class BasicAgentTestCase extends ImpTestCase {
 
     local res = ::JSONEncoder.encode(data);
 
-    this.assertEqual("{\"a\":123,\"c\":{\"_field\":123},\"b\":[1,2,3,4],\"e\":{\"field\":123},\"d\":5.125,\"g\":true,\"f\":null,\"i\":\"a\\ta\",\"h\":\"Some\\nùnicode\\rstring ø∆ø\"}", res);
+    this.assertEqual("{\"a\":123,\"c\":{\"_field\":123},\"b\":[1,2,3,4],\"e\":{\"field\":123},\"d\":5.125,\"g\":true,\"f\":null,\"i\":\"YQlh",\"h\":\"Some\\nùnicode\\rstring ø∆ø\"}", res);
   }
 
 }
