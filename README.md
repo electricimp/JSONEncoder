@@ -1,4 +1,4 @@
-# JSON Encoder 2.0.1 #
+# JSON Encoder 3.0.0 #
 
 This library can be used to encode Squirrel data structures into JSON.
 
@@ -39,17 +39,17 @@ Binary strings may be interpreted as Unicode strings. We recommend adding binary
 
 ### Blobs ###
 
-Blobs are stored as base64-encoded strings *(from version 2.0.1)*.
+Blobs are stored as base64-encoded strings *(from version 3.0.0)*.
 
 ```squirrel
 local b = blob(144);
 b.writestring("Welcome to the Electric Imp Dev Center. We’ve collected everything you’ll need to build great connected products with the Electric Imp Platform.")
 
-local j = JSONEncoder.encode({"a_blob":b});
+local j = JSONEncoder.encode({"binary_data":b});
 server.log(j);
 
 // Logs:
-// {"a_blob":"V2VsY29tZSB0byB0aGUgRWxlY3RyaWMgSW1wIERldiBDZW50ZXIuIFdl4oCZdmUgY29sbGVjdGVkIGV2ZXJ5dGhpbmcgeW914oCZbGwgbmVlZCB0byBidWlsZCBncmVhdCBjb25uZWN0ZWQgcHJvZHVjdHMgd2l0aCB0aGUgRWxlY3RyaWMgSW1wIFBsYXRmb3JtLg=="}
+// {"binary_data":"V2VsY29tZSB0byB0aGUgRWxlY3RyaWMgSW1wIERldiBDZW50ZXIuIFdl4oCZdmUgY29sbGVjdGVkIGV2ZXJ5dGhpbmcgeW914oCZbGwgbmVlZCB0byBidWlsZCBncmVhdCBjb25uZWN0ZWQgcHJvZHVjdHMgd2l0aCB0aGUgRWxlY3RyaWMgSW1wIFBsYXRmb3JtLg=="}
 ```
 
 ### Classes ###

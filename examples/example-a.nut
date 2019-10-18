@@ -1,4 +1,4 @@
-#require "JSONEncoder.class.nut:2.0.1"
+#require "JSONEncoder.class.nut:3.0.0"
 
 class A {
   field = 1
