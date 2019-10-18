@@ -2,7 +2,7 @@
 // This file is licensed under the MIT License
 // http://opensource.org/licenses/MIT
 
-@include "github:electricimp/JSONEncoder/JSONEncoder.class.nut@fix-binary-string-issue"
+//@include "github:electricimp/JSONEncoder/JSONEncoder.class.nut@fix-binary-string-issue"
 @include "github:electricimp/JSONParser/JSONParser.class.nut"
 
 class BlobDeviceTestCase extends ImpTestCase {
