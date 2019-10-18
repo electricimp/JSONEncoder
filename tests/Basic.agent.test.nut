@@ -37,14 +37,4 @@ class BasicAgentTestCase extends ImpTestCase {
     this.assertEqual("{\"a\":123,\"c\":{\"_field\":123},\"b\":[1,2,3,4],\"e\":{\"field\":123},\"d\":5.125,\"g\":true,\"f\":null,\"i\":\"a\\ta\",\"h\":\"Some\\nùnicode\\rstring ø∆ø\"}", res);
   }
 
-  /**
-   * @see https://github.com/electricimp/JSONEncoder/issues/2
-   */
-  function test02_Nullchars() {
-    local obj = blob(7);
-    obj.writestring("Hello");
-    local str = ::JSONEncoder.encode(obj);
-    this.assertEqual("\"Hello\\u0000\\u0000\"", str);
-  }
-
 }
