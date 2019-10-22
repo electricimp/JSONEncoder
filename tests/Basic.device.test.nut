@@ -2,8 +2,6 @@
 // This file is licensed under the MIT License
 // http://opensource.org/licenses/MIT
 
-@include "github:electricimp/JSONEncoder/JSONEncoder.class.nut"
-
 class BasicDeviceTestCase extends ImpTestCase {
 
     function test01() {
