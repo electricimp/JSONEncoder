@@ -127,8 +127,10 @@ class JSONEncoder {
     }
 
     /**
-     * Escape strings according to http://www.json.org/ spec
-     * @param {string} str
+     * Escape strings according to http://www.json.org/ spec.
+     * @param {string} str - The input string.
+     * @returns {string/null} - The rendered string output, or null if the string lacks valid unicode.
+     * @private
     */
     function _escape(str) {
         local res = "";
@@ -217,6 +219,12 @@ class JSONEncoder {
         return format(fs, i);
     }
 
+    /**
+     * Generate an ascii representation of a hex string of bytes.
+     * @param {blob/string} b - The input string or blob.
+     * @returns {string} - The ascii-encoded hex string output.
+     * @private
+    */
     function _dumpBytes(b) {
         local rs = "";
         for (local i = 0 ; i < b.len() ; i++) {
