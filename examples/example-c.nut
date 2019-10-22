@@ -1,8 +1,8 @@
-#require "JSONEncoder.class.nut:3.0.0"
+#require "JSONEncoder.class.nut:2.1.0"
 
 t <- {
-  a = 123,
-  b = [1, 2, 3, 4]
+    a = 123,
+    b = [1, 2, 3, 4]
 };
 
 s <- JSONEncoder.encode(t);

@@ -6,18 +6,18 @@
 
 // value returned by _serialize() is then encoded further
 class serializeClass {
-  function _serialize() {
-    // very long integer
-    return "12345678901234567890"
-  }
+    function _serialize() {
+        // very long integer
+        return "12345678901234567890";
+    }
 };
 
 // value returned by _serializeRaw() is then encoded further
 class serializeRawClass {
-  function _serializeRaw() {
-    // very long integer
-    return "12345678901234567890"
-  }
+    function _serializeRaw() {
+        // very long integer
+        return "12345678901234567890";
+    }
 };
 
 s <- JSONEncoder.encode({i1 = serializeClass(), i2 = serializeRawClass()});
