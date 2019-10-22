@@ -4,7 +4,7 @@
 
 class JSONEncoder {
 
-    static VERSION = "3.0.0";
+    static VERSION = "2.1.0";
 
     // max structure depth
     // anything above probably has a cyclic ref
@@ -101,12 +101,25 @@ class JSONEncoder {
                 // Workaround a known bug: on device side Blob.tostring()
                 // returns null instead of an empty string. And base64-encode
                 // the blob as per http.jsonencode() page suggests.
-                r += "\"" + (val.len() ? this._base64encode(val) : "") + "\"";
-                break;
+                if (val.len() == 0) {
+                    r += "\"\"";
+                    break;
+                }
+
+                // Fallthrough to string handler
 
             // Strings and all other types
             default:
-                r += "\"" + this._escape(val.tostring()) + "\"";
+                // Try to get the data as viable human-readable string, ie.
+                // it contains unicode/Ascii
+                local x = this._escape(val.tostring());
+                if (x != null) {
+                    // The string is *probably* valid, so add it to the JSON
+                    r += "\"" + x + "\"";
+                } else {
+                    // The string doesn't appear to be valid so just dump it
+                    r += "\"" + this._dumpBytes(val) + "\"";
+                }
                 break;
         }
 
@@ -154,7 +167,9 @@ class JSONEncoder {
                         local ch2 = (str[++i] & 0xFF);
                         res += format("%c%c", ch1, ch2);
                     } else {
-                        throw "Insufficient data for 2-byte Unicode";
+                        //throw "Insufficient data for 2-byte Unicode";
+                        res = null;
+                        break;
                     }
                 } else if ((ch1 & 0xF0) == 0xE0) {
                     // 1110xxxx = 3-byte unicode
@@ -163,61 +178,30 @@ class JSONEncoder {
                         local ch3 = (str[++i] & 0xFF);
                         res += format("%c%c%c", ch1, ch2, ch3);
                     } else {
-                        throw "Insufficient data for 3-byte Unicode";
+                        //throw "Insufficient data for 3-byte Unicode";
+                        res = null;
+                        break;
                     }
                 } else if ((ch1 & 0xF8) == 0xF0) {
-                    // 11110xxx = 4 byte unicode
+                    // 11110xxx = 4-byte unicode
                     if (i + 3 < str.len()) {
                         local ch2 = (str[++i] & 0xFF);
                         local ch3 = (str[++i] & 0xFF);
                         local ch4 = (str[++i] & 0xFF);
                         res += format("%c%c%c%c", ch1, ch2, ch3, ch4);
                     } else {
-                        throw "Insufficient data for 4-byte Unicode";
+                        //throw "Insufficient data for 4-byte Unicode";
+                        res = null;
+                        break;
                     }
                 } else {
-                    throw "String contains invalid Unicode";
+                    res = null;
+                    break;
                 }
             }
         }
 
         return res;
-    }
-
-    /**
-     * Base64-encode the supplied string.
-     * @param {string} input - The input string.
-     * @returns {string} - The base64 encode.
-     * @private
-    */
-    function _base64encode(input) {
-        local charStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        local output = "";
-        // Copy the input as it may be changed by the code below
-        local data = input.tostring();
-        // Add one or two padding bytes
-        while (data.len() % 3 != 0) data += "\x0";
-        // Perform the encode
-        for (local i = 0 ; i < data.len() ; i += 3) {
-            local bitfield = (data[i] << 16) | (data[i + 1] << 8) | data[i + 2];
-            local padFlag = false;
-            for (local j = 0 ; j < 4 ; j++) {
-                local shift = 6 * (3 - j);
-                local group = (bitfield & (0x3F << shift)) >> shift;
-                // Display the base64 padding indicators as required
-                if (group == 0 && padFlag) {
-                    output += "==".slice(0, 4 - j);
-                    break;
-                }
-                // Display the current character
-                output += charStr[group].tochar();
-                padFlag = false;
-                // Check for what may be the last 'nibble'
-                if (j == 1 && (group & 0x0F) == 0) padFlag = true;
-                if (j == 2 && (group & 0x03) == 0) padFlag = true;
-            }
-        }
-        return output;
     }
 
     /**
@@ -231,5 +215,13 @@ class JSONEncoder {
         if (n % 2 != 0) n++;
         local fs = "%0" + n.tostring() + "x";
         return format(fs, i);
+    }
+
+    function _dumpBytes(b) {
+        local rs = "";
+        for (local i = 0 ; i < b.len() ; i++) {
+            rs += "\\x" + _toHex(b[i])
+        }
+        return rs;
     }
 }
