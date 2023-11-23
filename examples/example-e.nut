@@ -1,4 +1,7 @@
-#require "JSONEncoder.class.nut:2.1.0"
+// Copyright (c) 2017-19 Electric Imp
+// Copyright (c) 2020-23 KORE Wireless
+
+#require "JSONEncoder.class.nut:3.0.0"
 
 /**
  * Example of blob serialization
@@ -10,7 +13,7 @@ b.writestring("Welcome to the Electric Imp Dev Center. We’ve collected everyth
 local uniStr1 = "💾❤️😎🎸";
 local uniStr2 = "\xF0\x9F\x98\x9C";
 
-local j = JSONEncoder.encode({"binary_data":b, "uni_strings": [{"uni_string_one":uniStr}, {"uni_string_two":uniStr2}]});
+local j = JSONEncoder.encode({"binary_data":b, "uni_strings": [{"uni_string_one":uniStr1}, {"uni_string_two":uniStr2}]});
 server.log(j);
 
 // Logs:

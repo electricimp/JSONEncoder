@@ -1,3 +1,6 @@
+// Copyright (c) 2017-19 Electric Imp
+// Copyright (c) 2020-23 KORE Wireless
+
 #require "JSONEncoder.class.nut:3.0.0"
 
 /**

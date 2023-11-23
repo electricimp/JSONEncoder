@@ -1,10 +1,11 @@
 // Copyright (c) 2017-19 Electric Imp
+// Copyright (c) 2020-23 KORE Wireless
 // This file is licensed under the MIT License
 // http://opensource.org/licenses/MIT
 
 class JSONEncoder {
 
-    static VERSION = "2.1.0";
+    static VERSION = "3.0.0";
 
     // max structure depth
     // anything above probably has a cyclic ref
@@ -169,7 +170,6 @@ class JSONEncoder {
                         local ch2 = (str[++i] & 0xFF);
                         res += format("%c%c", ch1, ch2);
                     } else {
-                        //throw "Insufficient data for 2-byte Unicode";
                         res = null;
                         break;
                     }
@@ -180,7 +180,6 @@ class JSONEncoder {
                         local ch3 = (str[++i] & 0xFF);
                         res += format("%c%c%c", ch1, ch2, ch3);
                     } else {
-                        //throw "Insufficient data for 3-byte Unicode";
                         res = null;
                         break;
                     }
@@ -192,7 +191,7 @@ class JSONEncoder {
                         local ch4 = (str[++i] & 0xFF);
                         res += format("%c%c%c%c", ch1, ch2, ch3, ch4);
                     } else {
-                        //throw "Insufficient data for 4-byte Unicode";
+
                         res = null;
                         break;
                     }

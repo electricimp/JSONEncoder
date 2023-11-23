@@ -1,4 +1,4 @@
-# JSON Encoder 2.1.0 #
+# JSON Encoder 3.0.0 #
 
 This library can be used to encode Squirrel data structures into JSON.
 
