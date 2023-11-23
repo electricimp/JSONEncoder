@@ -1,27 +1,30 @@
-#require "JSONEncoder.class.nut:1.0.0"
+// Copyright (c) 2017-19 Electric Imp
+// Copyright (c) 2020-23 KORE Wireless
+
+#require "JSONEncoder.class.nut:3.0.0"
 
 class A {
-  field = 1
+    field = 1
 
-  constructor() {
-    // when serialized as instance field==2 should be returned
-    this.field = 2;
-  }
+    constructor() {
+        // when serialized as instance field==2 should be returned
+        this.field = 2;
+    }
 }
 
 // iterated in a custom way
 class C {
-  field = 123
+    field = 123
 
-  function _nexti(p) {
-    if (p == null) return 0;
-    if (p < 1) return p+1;
-    return null;
-  }
+    function _nexti(p) {
+        if (p == null) return 0;
+        if (p < 1) return p+1;
+        return null;
+    }
 
-  function _get(i) {
-    return "c";
-  }
+    function _get(i) {
+        return "c";
+    }
 }
 
 s <- JSONEncoder.encode({a=A(),c=C()});
